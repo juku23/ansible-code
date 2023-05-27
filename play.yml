@@ -1,0 +1,39 @@
+---
+- hosts: qaserver
+  become: yes
+  ignore_errors: yes
+  vars:
+    pkg_name: httpd
+    username: morgan
+  tasks:    
+    - name: creating user
+      user:
+        name: "{{ username }}"
+        comment: Morgan Nyesuah
+        shell: /bin/bash
+        state: present
+  
+           # when: ansible_os_family == "ubuntu"    
+    - name: create file
+      file:
+        path: /tmp/ansible.txt
+        state: touch
+        mode: '0600'
+    - name: create directory
+      file:
+        path: /path/dir
+        state: directory
+        mode: '0777' 
+    - name: install apache
+      yum:
+       name: "{{ pkg_name }}"
+       state: present
+    - name: install finger
+      package:
+       name: "{{ items }}"
+       state: present 
+      with_items:
+        - wget
+        - samba
+        - java-8*
+        - finger    
