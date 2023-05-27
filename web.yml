@@ -1,0 +1,42 @@
+---
+- hosts: qaserver
+  become: yes
+  ignore_errors: yes
+    taskes:
+      - name: install package
+         package:
+       name: "{{ items }}"
+       state: present
+    with_items:
+        - unzip
+        - wget
+        - httpd
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
